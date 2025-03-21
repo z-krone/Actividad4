@@ -10,7 +10,6 @@ Exercises
 
 from random import randrange
 from turtle import *
-
 from freegames import vector
 
 ball = vector(-200, -200)
@@ -23,8 +22,9 @@ def tap(x, y):
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        speed.x = (x + 200) / 10
-        speed.y = (y + 200) / 10
+        # Aumentar la velocidad del proyectil
+        speed.x = (x + 200) / 5  # Cambiado para aumentar la velocidad horizontal
+        speed.y = (y + 200) / 5  # Cambiado para aumentar la velocidad vertical
 
 
 def inside(xy):
@@ -55,7 +55,7 @@ def move():
         targets.append(target)
 
     for target in targets:
-        target.x -= 1
+        target.x -= 2  # Aumentado para que los objetivos se muevan más rápido
 
     if inside(ball):
         speed.y -= 0.35
@@ -74,6 +74,13 @@ def move():
     for target in targets:
         if target.x < -210:  # Si un objetivo se sale de la pantalla por la izquierda
             target.x = 210  # Lo reubica en el lado derecho
+
+    # Reposicionar el balón cuando sale de la pantalla
+    if not inside(ball):
+        ball.x = -199
+        ball.y = -199
+        speed.x = 0
+        speed.y = 0
 
     ontimer(move, 30)
 
