@@ -69,10 +69,11 @@ def move():
             targets.append(target)
 
     draw()
-
+    
+    # Reposicionar objetivos que salen de la pantalla
     for target in targets:
-        if not inside(target):
-            return
+        if target.x < -210:  # Si un objetivo se sale de la pantalla por la izquierda
+            target.x = 210  # Lo reubica en el lado derecho
 
     ontimer(move, 30)
 
